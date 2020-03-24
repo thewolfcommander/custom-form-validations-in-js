@@ -22,7 +22,7 @@ function showSuccess(input) {
 var validateEmail = (input) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
-    if (re.test(input)) {
+    if (re.test(input.value.trim())) {
         showSuccess(input);
     }
     else {
@@ -63,11 +63,9 @@ function checkLength(input, min, max) {
     }
 }
 
-function checkPasswords(password1, password2) {
-    if (password2 === password1) {
-        showSuccess(password2);
-    } else if (password2 != password1) {
-        showError(password2, "Passwords do not match.");
+function checkPasswords(input1, input2) {
+    if (input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match');
     }
 }
 
@@ -80,5 +78,7 @@ form.addEventListener('submit', function(e) {
     checkLength(password1, 6, 16);
 
     validateEmail(email);
+
+    checkPasswords(password1, password2)
 
 })
