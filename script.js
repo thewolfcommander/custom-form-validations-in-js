@@ -19,9 +19,15 @@ function showSuccess(input) {
 }
 
 // Validate Email
-var validateEmail = (email) => {
+var validateEmail = (input) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    
+    if (re.test(input)) {
+        showSuccess(input);
+    }
+    else {
+        showError(input, 'Email is not valid');
+    }
 }
 
 // Validate Strong Password
@@ -73,5 +79,6 @@ form.addEventListener('submit', function(e) {
     checkLength(username, 3, 15);
     checkLength(password1, 6, 16);
 
-    checkPasswords(password1, password2);
+    validateEmail(email);
+
 })
