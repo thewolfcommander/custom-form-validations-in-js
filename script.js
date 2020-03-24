@@ -33,7 +33,11 @@ var validateEmail = (input) => {
 // Validate Strong Password
 var validateStrongPassword = (password) => {
     const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    return re.test(String(password));
+    if (re.test(password)) {
+        showSuccess(password);
+    } else {
+        showError(password, 'Choose a strong password');
+    }
 }
 
 // Function to check required field
@@ -79,6 +83,6 @@ form.addEventListener('submit', function(e) {
 
     validateEmail(email);
 
-    checkPasswords(password1, password2)
+    checkPasswords(password1, password2);
 
 })
